@@ -1,0 +1,130 @@
+.pipeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+.pipeline-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  background: linear-gradient(to bottom, var(--accent-teal), var(--accent-blue));
+  border-radius: 2px;
+  box-shadow: var(--glow-blue);
+  z-index: 1;
+}
+
+.pipeline-step {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 4rem;
+  width: 50%;
+  position: relative;
+  padding-right: 3rem;
+  z-index: 2;
+}
+
+.pipeline-step.right {
+  margin-left: auto;
+  justify-content: flex-start;
+  padding-right: 0;
+  padding-left: 3rem;
+}
+
+.step-node {
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--bg-color);
+  border: 4px solid var(--accent-teal);
+  border-radius: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pipeline-step.right .step-node {
+  left: -12px;
+  right: auto;
+}
+
+.node-inner {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-teal);
+  border-radius: 50%;
+  box-shadow: var(--glow-teal);
+}
+
+.step-content {
+  width: 100%;
+  position: relative;
+}
+
+.step-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 2px;
+  background: var(--surface-border);
+  z-index: -1;
+}
+
+.pipeline-step.left .step-content::before {
+  right: -3rem;
+}
+
+.pipeline-step.right .step-content::before {
+  left: -3rem;
+}
+
+.step-icon {
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.step-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.step-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .pipeline-line {
+    left: 20px;
+  }
+  
+  .pipeline-step {
+    width: 100%;
+    padding-left: 60px !important;
+    padding-right: 0 !important;
+    justify-content: flex-start;
+  }
+  
+  .step-node {
+    left: 8px !important;
+    right: auto !important;
+  }
+  
+  .pipeline-step.left .step-content::before,
+  .pipeline-step.right .step-content::before {
+    left: -40px;
+    right: auto;
+    width: 40px;
+  }
+}

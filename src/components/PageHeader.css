@@ -1,0 +1,23 @@
+.page-header {
+  padding: 8rem 0 4rem;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid var(--surface-border);
+  background: rgba(5, 5, 5, 0.5);
+}
+
+.page-title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: 1rem;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}

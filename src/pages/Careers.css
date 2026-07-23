@@ -1,0 +1,58 @@
+.careers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.benefits-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+.benefit-icon {
+  color: var(--accent-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.form-card {
+  padding: 3rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(10, 14, 20, 0.5);
+  border: 1px solid var(--surface-border);
+  border-radius: 2px;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  transition: all 0.3s ease;
+  appearance: none;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-teal);
+  box-shadow: 0 0 10px rgba(0, 229, 192, 0.1);
+}
+
+.w-100 {
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .careers-grid {
+    grid-template-columns: 1fr;
+  }
+}
