@@ -30,11 +30,14 @@ const Contact = () => {
     <div className="contact-page">
       <PageHeader 
         title="Initiate Handshake" 
-        subtitle="Secure a meeting with our engineering leads to discuss your silicon requirements." 
+        subtitle="Secure a meeting with our engineering leads to discuss your silicon requirements or IP licensing needs." 
       />
       
       <section className="section">
         <div className="container">
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto 4rem', textAlign: 'center', lineHeight: 1.8 }}>
+            Whether you need to license a standard AMBA peripheral, require custom RTL design for an AI accelerator, or want our team to build a complete UVM verification environment for your existing IP, we are ready to execute. Reach out below and an engineering lead will respond within 24 hours.
+          </p>
           <div className="contact-grid">
             <motion.div 
               className="contact-info"
@@ -43,6 +46,10 @@ const Contact = () => {
             >
               <h2 className="tech-text mb-4">// GLOBAL_PRESENCE</h2>
               
+              <div style={{ height: '200px', borderRadius: '4px', overflow: 'hidden', marginBottom: '2rem', border: '1px solid var(--surface-border)' }}>
+                <img src="https://picsum.photos/seed/office-map/600/300?grayscale" alt="Office Location" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7) contrast(1.2)', mixBlendMode: 'screen' }} />
+              </div>
+
               <div className="info-card glass-card">
                 <MapPin className="info-icon" />
                 <div>
@@ -62,10 +69,8 @@ const Contact = () => {
               <div className="info-card glass-card">
                 <Calendar className="info-icon" />
                 <div>
-                  <h3>Schedule Discovery Call</h3>
-                  <a href="#" className="btn btn-outline" style={{marginTop: '1rem'}}>
-                    View Calendly
-                  </a>
+                  <h3>Response Time</h3>
+                  <p>Typically under 24 hours for technical inquiries.</p>
                 </div>
               </div>
             </motion.div>
@@ -106,10 +111,10 @@ const Contact = () => {
                     <label>Project Type</label>
                     <select name="projectType" value={formData.projectType} onChange={handleChange} required>
                       <option value="">Select an option</option>
-                      <option value="RTL Design">RTL Design</option>
-                      <option value="Verification">Verification</option>
-                      <option value="Formal Verification">Formal Verification</option>
-                      <option value="Embedded Firmware">Embedded Firmware</option>
+                      <option value="IP Licensing">IP Licensing</option>
+                      <option value="Custom RTL">Custom RTL Design</option>
+                      <option value="Verification Services">Verification Services</option>
+                      <option value="Careers">Careers / Hiring</option>
                       <option value="Other">Other</option>
                     </select>
                   </div>

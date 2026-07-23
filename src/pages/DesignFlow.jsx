@@ -52,8 +52,16 @@ const DesignFlow = () => {
         subtitle="Generate a bespoke IC design pipeline based on your architectural requirements." 
       />
       
-      <section className="section">
+      <section className="section" style={{ paddingTop: '2rem' }}>
         <div className="container">
+          {!flowData && !loading && (
+            <div style={{ maxWidth: '800px', margin: '0 auto 4rem', textAlign: 'center' }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.8 }}>
+                Every custom silicon project is unique. A deeply embedded IoT sensor requires a vastly different verification strategy than a multi-core AI accelerator. Use the interactive questionnaire below to define your architectural constraints. Based on your inputs, our engine will automatically generate a custom RTL-to-GDSII project pipeline, highlighting the specific verification risks, necessary EDA tools, and estimated timelines for your bespoke IP.
+              </p>
+            </div>
+          )}
+
           {error && (
             <div className="glass-card" style={{ padding: '1rem', borderLeftColor: 'var(--error-red)', marginBottom: '2rem' }}>
               <p style={{ color: 'var(--error-red)', margin: 0 }}>{error}</p>

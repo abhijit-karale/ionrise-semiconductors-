@@ -63,11 +63,11 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <Link to="/services" className="btn btn-primary">
-                  Explore Services <ArrowRight size={18} />
+                <Link to="/ip-cores" className="btn btn-primary">
+                  Explore IP Cores <ArrowRight size={18} />
                 </Link>
-                <Link to="/portfolio" className="btn btn-outline">
-                  View Projects
+                <Link to="/contact" className="btn btn-outline">
+                  Talk to Us
                 </Link>
               </motion.div>
             </div>
@@ -123,9 +123,9 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <div className="stat-number">
-                <CountUp end={95} duration={2} suffix="%+" />
+                <CountUp end={5} duration={2} suffix="+" />
               </div>
-              <div className="stat-label tech-text">Functional Coverage (RISC-V UVM)</div>
+              <div className="stat-label tech-text">Verified IP Cores</div>
             </motion.div>
             <motion.div 
               className="stat-card glass-card"
@@ -135,9 +135,9 @@ const Home = () => {
               transition={{ delay: 0.1 }}
             >
               <div className="stat-number">
-                <CountUp end={350} duration={2.5} suffix="+" />
+                <CountUp end={96} duration={2.5} suffix="%+" />
               </div>
-              <div className="stat-label tech-text">Directed & Random Tests (ASIC)</div>
+              <div className="stat-label tech-text">Avg. Functional Coverage</div>
             </motion.div>
             <motion.div 
               className="stat-card glass-card"
@@ -147,9 +147,9 @@ const Home = () => {
               transition={{ delay: 0.2 }}
             >
               <div className="stat-number">
-                <CountUp end={7} duration={2} />
+                <CountUp end={3} duration={2} />
               </div>
-              <div className="stat-label tech-text">RTL/DV Projects Shipped</div>
+              <div className="stat-label tech-text">AMBA Protocols Supported</div>
             </motion.div>
             <motion.div 
               className="stat-card glass-card"
@@ -159,9 +159,9 @@ const Home = () => {
               transition={{ delay: 0.3 }}
             >
               <div className="stat-number">
-                <CountUp end={100} duration={2} suffix=" MHz" />
+                <CountUp end={2} duration={2} />
               </div>
-              <div className="stat-label tech-text">Validated FPGA Implementation</div>
+              <div className="stat-label tech-text">Fab Process Nodes Targeted</div>
             </motion.div>
           </div>
         </div>
@@ -176,15 +176,14 @@ const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Featured Services
+            Why Ionrise?
           </motion.h2>
           
-          <div className="value-grid">
+          <div className="value-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
             {[
-              { icon: Cpu, title: 'RTL Design', desc: 'Verilog, SystemVerilog, VHDL, FSMs, datapath & controller design.' },
-              { icon: Activity, title: 'UVM Verification', desc: 'Layered testbenches, constrained-random verification, coverage closure.' },
-              { icon: Grid, title: 'Formal Verification', desc: 'SVA + JasperGold property proving for critical logic paths.' },
-              { icon: Zap, title: 'Embedded Firmware & Bring-up', desc: 'Embedded C, FreeRTOS, peripheral drivers, and hardware bring-up.' }
+              { icon: Activity, title: 'Silicon-Proven Verification', desc: 'We do not just write RTL; we stress-test it. Every core undergoes exhaustive constrained-random UVM verification, formal property checking, and structural CDC/RDC linting before release.' },
+              { icon: Grid, title: 'Strict Protocol Compliance', desc: 'Our interface IP is verified against standardized assertions to ensure 100% compliance with AMBA AXI/APB and industry-standard peripheral specifications, ensuring drop-in SoC integration.' },
+              { icon: Cpu, title: 'Fast Integration Support', desc: 'We deliver more than just encrypted netlists. Our IP comes with clear integration guides, reference synthesis scripts, and direct engineering support to help you achieve timing closure faster.' }
             ].map((item, index) => (
               <motion.div 
                 key={index}
@@ -200,16 +199,13 @@ const Home = () => {
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
-                <Link to="/services" className="tech-text" style={{ display: 'inline-flex', alignItems: 'center', marginTop: '1rem', gap: '0.5rem' }}>
-                  Learn more <ArrowRight size={14} />
-                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Preview */}
+      {/* Featured IP Cores Preview */}
       <section className="projects-preview section" style={{ background: 'rgba(230, 237, 243, 0.02)' }}>
         <div className="container">
           <motion.h2 
@@ -218,13 +214,13 @@ const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Featured Projects
+            Featured IP Cores
           </motion.h2>
           <div className="value-grid">
             {[
-              { title: '32-bit RISC-V Processor', desc: '5-stage pipeline, 95%+ coverage, UVM environment.' },
-              { title: 'Sync/Async FIFO', desc: 'Gray-code CDC, parameterizable depth.' },
-              { title: 'AMBA-APB Slave Peripheral', desc: 'Address decoding, access phases, coverage closure.' }
+              { title: 'IonCore RV32I', desc: 'A 5-stage pipelined RISC-V processor optimized for deeply embedded control applications.', seed: 'riscv-core' },
+              { title: 'IonBridge APB', desc: 'High-speed AMBA APB 4.0 compliant bridge and timer peripheral.', seed: 'amba-bridge' },
+              { title: 'IonSync FIFO', desc: 'Asynchronous FIFO with gray-code CDC and parameterized depth/width.', seed: 'async-fifo' }
             ].map((item, index) => (
               <motion.div 
                 key={index}
@@ -233,14 +229,19 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
               >
-                <h3 style={{ color: 'var(--accent-blue)', marginBottom: '0.5rem' }}>{item.title}</h3>
+                <div style={{ height: '120px', borderRadius: '4px', overflow: 'hidden' }}>
+                  <img src={`https://picsum.photos/seed/${item.seed}/400/200?grayscale`} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', mixBlendMode: 'screen', filter: 'brightness(0.8) contrast(1.2)' }} />
+                </div>
+                <h3 style={{ color: 'var(--accent-teal)', marginBottom: '0.5rem' }}>{item.title}</h3>
                 <p style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
+                <Link to="/ip-cores" style={{ color: 'var(--text-main)', fontSize: '0.9rem', marginTop: 'auto', textDecoration: 'underline' }}>View Specs →</Link>
               </motion.div>
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-            <Link to="/portfolio" className="btn btn-outline">View Full Portfolio</Link>
+            <Link to="/ip-cores" className="btn btn-outline">View Full IP Catalog</Link>
           </div>
         </div>
       </section>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
-import { ShieldCheck, HardDrive, Cpu, TerminalSquare } from 'lucide-react';
+import { ShieldCheck, HardDrive, Cpu, TerminalSquare, ArrowRight } from 'lucide-react';
 
 const Partners = () => {
   const nodes = ['TSMC 28nm HPC', 'GlobalFoundries 22FDX', 'UMC 65nm', 'Intel 16 (Planned)'];
@@ -19,10 +20,16 @@ const Partners = () => {
         subtitle="Process nodes and EDA toolchains validated in our design flow." 
       />
       
-      <section className="section">
+      <section className="section" style={{ paddingTop: '2rem' }}>
         <div className="container">
+          <div style={{ maxWidth: '800px', margin: '0 auto 4rem', textAlign: 'center' }}>
+            <p className="tech-text" style={{ marginBottom: '1rem', color: 'var(--accent-gold)' }}>/* ILLUSTRATIVE TARGET ECOSYSTEM */</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.8 }}>
+              At Ionrise, we design RTL that is agnostic to the underlying foundry, but we rigorously validate our netlists against industry-standard process design kits (PDKs) and EDA tools. The ecosystem targets listed below represent the environments where our IP has been formally verified to meet synthesis, timing, and logical equivalence standards.
+            </p>
+          </div>
+
           <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
-            <p className="tech-text" style={{ marginBottom: '2rem' }}>/* ILLUSTRATIVE ECOSYSTEM SUPPORT */</p>
             <h2 className="section-title" style={{ justifyContent: 'center' }}>Supported Process Nodes</h2>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '2rem' }}>
               {nodes.map((node, i) => (
@@ -61,6 +68,25 @@ const Partners = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+
+          {/* Become a Partner CTA */}
+          <div style={{ marginTop: '6rem' }}>
+            <motion.div 
+              className="glass-card"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ textAlign: 'center', padding: '4rem 2rem', background: 'rgba(0, 229, 192, 0.05)', border: '1px solid var(--accent-teal)' }}
+            >
+              <h2 style={{ color: 'var(--text-main)', marginBottom: '1rem' }}>Become a Partner</h2>
+              <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto 2rem', lineHeight: 1.6 }}>
+                Are you an EDA vendor, silicon foundry, or design services firm looking to integrate high-quality, pre-verified RTL into your reference flows? We are actively seeking partnerships to co-validate our IP across emerging nodes and advanced packaging technologies.
+              </p>
+              <Link to="/contact" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                Initiate Partnership <ArrowRight size={18} />
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>

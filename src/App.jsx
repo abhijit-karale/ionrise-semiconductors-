@@ -8,16 +8,10 @@ import GenericPage from './pages/GenericPage';
 
 import Home from './pages/Home';
 import About from './pages/About';
-import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
-import Process from './pages/Process';
-import TechStack from './pages/TechStack';
-import Team from './pages/Team';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
-import Industries from './pages/Industries';
-import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import IPCores from './pages/IPCores';
@@ -86,14 +80,8 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/process" element={<Process />} />
-        <Route path="/technology" element={<TechStack />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/industries" element={<Industries />} />
-        <Route path="/pricing" element={<Pricing />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/ip-cores" element={<IPCores />} />
