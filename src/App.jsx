@@ -25,18 +25,55 @@ import Products from './pages/Products';
 import Partners from './pages/Partners';
 import Datasheets from './pages/Datasheets';
 import DesignFlow from './pages/DesignFlow';
+import { Cpu } from 'lucide-react';
+
 const PageTransition = ({ children }) => {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
+      {/* The actual page content */}
       <motion.div
         key={location.pathname}
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.3 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        style={{ width: '100%', minHeight: '100vh' }}
       >
         {children}
+      </motion.div>
+
+      {/* The Chip / IC Transition Overlay */}
+      <motion.div
+        key={location.pathname + "-overlay"}
+        initial={{ scaleY: 1 }}
+        animate={{ scaleY: 0 }}
+        exit={{ scaleY: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "var(--bg-color)",
+          zIndex: 9999,
+          transformOrigin: "top",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderBottom: "2px solid var(--accent-teal)"
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 1, scale: 0.5, rotate: -90 }}
+          animate={{ opacity: 0, scale: 1.5, rotate: 0 }}
+          exit={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 0.4 }}
+          style={{ color: "var(--accent-teal)" }}
+        >
+          <Cpu size={80} strokeWidth={1} />
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );
