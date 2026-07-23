@@ -81,7 +81,7 @@ const Blog = () => {
                   />
                 </div>
                 <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                  <div style={{ display: 'flex', justify-content: 'space-between', color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
                     <span>{post.date}</span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><Clock size={14} /> {post.readTime}</span>
                   </div>
