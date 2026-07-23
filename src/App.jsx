@@ -37,7 +37,7 @@ const PageTransition = ({ children }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
+        transition={{ duration: 1.5, delay: 0.2 }}
         style={{ width: '100%', minHeight: '100vh' }}
       >
         {children}
@@ -49,7 +49,7 @@ const PageTransition = ({ children }) => {
         initial={{ scaleY: 1 }}
         animate={{ scaleY: 0 }}
         exit={{ scaleY: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
         style={{
           position: "fixed",
           top: 0,
@@ -69,7 +69,7 @@ const PageTransition = ({ children }) => {
           initial={{ opacity: 1, scale: 0.5, rotate: -90 }}
           animate={{ opacity: 0, scale: 1.5, rotate: 0 }}
           exit={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 1.5 }}
           style={{ color: "var(--accent-teal)" }}
         >
           <Cpu size={80} strokeWidth={1} />
