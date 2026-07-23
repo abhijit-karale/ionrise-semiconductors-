@@ -34,9 +34,10 @@ const Footer = () => {
           <div className="link-group">
             <h4 className="group-title">Solutions</h4>
             <Link to="/products">Products</Link>
-            <Link to="/technology">Technology</Link>
-            <Link to="/industries">Industries</Link>
-            <Link to="/pricing">Pricing</Link>
+            <Link to="/ip-cores">IP Cores</Link>
+            <Link to="/design-flow">Design Flow</Link>
+            <Link to="/datasheets">Datasheets</Link>
+            <Link to="/partners">Partners</Link>
           </div>
 
           <div className="link-group">

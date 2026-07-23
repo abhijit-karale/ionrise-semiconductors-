@@ -134,6 +134,70 @@ app.get('/api/roadmaps/:id', async (req, res) => {
   }
 });
 
+// API: Generate Design Flow
+app.post('/api/design-flow/generate', async (req, res) => {
+  const { projectType, protocol, features, timing, verification } = req.body;
+  try {
+    const { rows } = await db.query('SELECT * FROM design_flow_templates ORDER BY stage_order ASC');
+    
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'No templates found.' });
+    }
+
+    const flowId = require('crypto').randomUUID().split('-')[0];
+    
+    const flowData = { stages: [] };
+    
+    rows.forEach(r => {
+      const stage = {
+        id: `s${r.stage_order}`,
+        name: r.stage_name,
+        duration: r.duration_estimate,
+        tasks: r.milestones_json,
+        riskFlag: null
+      };
+
+      // Risk auto-injection based on features
+      if (r.stage_order === 2 && features.includes('Clock Domain Crossing (CDC)')) {
+        stage.riskFlag = 'CDC complexity requires structural checking before simulation.';
+      }
+      if (r.stage_order === 3 && features.includes('Low-power mode')) {
+        stage.riskFlag = 'Power-domain verification (UPF) is critical. Auto-adding milestone.';
+        stage.tasks.push({ id: `t_risk_${r.stage_order}`, text: 'Verify UPF power intent.' });
+      }
+      if (r.stage_order === 4 && timing === 'High Performance (> 500MHz)') {
+        stage.riskFlag = 'Timing closure risk high due to target frequency.';
+      }
+
+      flowData.stages.push(stage);
+    });
+
+    await db.query(
+      'INSERT INTO user_design_flows (id, intake_answers_json, flow_data_json) VALUES ($1, $2, $3)',
+      [flowId, JSON.stringify(req.body), JSON.stringify(flowData)]
+    );
+
+    res.status(201).json({ id: flowId });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to generate design flow' });
+  }
+});
+
+// API: Get Design Flow by ID
+app.get('/api/design-flow/:id', async (req, res) => {
+  try {
+    const { rows } = await db.query('SELECT * FROM user_design_flows WHERE id = $1', [req.params.id]);
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Flow not found' });
+    }
+    res.json(rows[0].flow_data_json);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to retrieve flow' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Ionrise backend running on port ${port}`);
 });

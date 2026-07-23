@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://abhijit-karale.github.io/ionrise-semiconductors",
+  "homepage": "https://abhijit-karale.github.io/ionrise-semiconductors-/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

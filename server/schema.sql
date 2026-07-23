@@ -50,3 +50,18 @@ CREATE TABLE IF NOT EXISTS user_roadmaps (
   email_optional VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS design_flow_templates (
+  id SERIAL PRIMARY KEY,
+  stage_name VARCHAR(255) NOT NULL,
+  stage_order INT NOT NULL,
+  duration_estimate VARCHAR(255) NOT NULL,
+  milestones_json JSONB NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_design_flows (
+  id VARCHAR(255) PRIMARY KEY,
+  intake_answers_json JSONB NOT NULL,
+  flow_data_json JSONB NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

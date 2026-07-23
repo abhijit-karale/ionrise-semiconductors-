@@ -20,8 +20,11 @@ import Industries from './pages/Industries';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
-import Roadmap from './pages/Roadmap';
-
+import IPCores from './pages/IPCores';
+import Products from './pages/Products';
+import Partners from './pages/Partners';
+import Datasheets from './pages/Datasheets';
+import DesignFlow from './pages/DesignFlow';
 const PageTransition = ({ children }) => {
   const location = useLocation();
   return (
@@ -56,8 +59,12 @@ const AppRoutes = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/roadmap" element={<Roadmap />} />
-        <Route path="/roadmap/r/:id" element={<Roadmap />} />
+        <Route path="/ip-cores" element={<IPCores />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/partners" element={<Partners />} />
+        <Route path="/datasheets" element={<Datasheets />} />
+        <Route path="/design-flow" element={<DesignFlow />} />
+        <Route path="/design-flow/f/:id" element={<DesignFlow />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
       </Routes>

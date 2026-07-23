@@ -12,6 +12,9 @@
   --accent-teal: #00E5C0;
   --accent-blue: #3B82F6;
   --accent-gold: #F5B942;
+  --pcb-green: #2ECC71;
+  --wafer-silver: #B8C4D0;
+  --error-red: #EF4444;
   
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -210,4 +213,72 @@ a:hover {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-teal);
+}
+
+/* Semiconductor / Datasheet Specific Styles */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.spec-table tr {
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.spec-table tr:last-child {
+  border-bottom: none;
+}
+
+.spec-table td {
+  padding: 0.75rem 0;
+  color: var(--text-main);
+}
+
+.spec-table td:first-child {
+  color: var(--text-muted);
+}
+
+.spec-table td:last-child {
+  text-align: right;
+  color: var(--accent-gold);
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.status-pill.verified {
+  background: rgba(46, 204, 113, 0.1);
+  color: var(--pcb-green);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.status-pill.in-progress {
+  background: rgba(245, 185, 66, 0.1);
+  color: var(--accent-gold);
+  border: 1px solid rgba(245, 185, 66, 0.3);
+}
+
+.status-pill.planned {
+  background: rgba(139, 155, 180, 0.1);
+  color: var(--text-muted);
+  border: 1px solid rgba(139, 155, 180, 0.3);
+}
+
+.waveform-pulse {
+  animation: pulse-wave 2s infinite ease-in-out;
+}
+
+@keyframes pulse-wave {
+  0% { opacity: 0.3; transform: scaleY(0.8); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+  100% { opacity: 0.3; transform: scaleY(0.8); }
 }

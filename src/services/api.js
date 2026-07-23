@@ -4,9 +4,7 @@ export const submitContactForm = async (data) => {
   try {
     const response = await fetch(`${API_BASE_URL}/contact`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error('Failed to submit contact form');
@@ -21,9 +19,7 @@ export const submitApplication = async (data) => {
   try {
     const response = await fetch(`${API_BASE_URL}/careers`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error('Failed to submit application');
@@ -41,7 +37,6 @@ export const fetchBlogPosts = async () => {
     return await response.json();
   } catch (error) {
     console.error('Blog fetch error:', error);
-    // Fallback to empty array to avoid breaking the frontend
     return [];
   }
 };
@@ -57,105 +52,92 @@ export const fetchProjectsFromDb = async () => {
   }
 };
 
-export const generateRoadmap = async (data) => {
+export const generateDesignFlow = async (data) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/roadmaps/generate`, {
+    const response = await fetch(`${API_BASE_URL}/design-flow/generate`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
     if (!response.ok) {
       const err = await response.json();
-      throw new Error(err.error || 'Failed to generate roadmap');
+      throw new Error(err.error || 'Failed to generate flow');
     }
     return await response.json();
   } catch (error) {
-    console.warn('Roadmap generate error, falling back to mock data:', error);
-    // Graceful fallback for MVP
+    console.warn('Flow generate error, falling back to mock data:', error);
     return { id: 'mock-' + Date.now().toString().slice(-6) };
   }
 };
 
-export const fetchRoadmap = async (id) => {
+export const getDesignFlow = async (id) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/roadmaps/${id}`);
-    if (!response.ok) {
-      throw new Error('Roadmap not found');
-    }
+    const response = await fetch(`${API_BASE_URL}/design-flow/${id}`);
+    if (!response.ok) throw new Error('Flow not found');
     return await response.json();
   } catch (error) {
-    console.warn('Roadmap fetch error, falling back to mock data:', error);
-    // Graceful fallback mock matching UVM track
+    console.warn('Flow fetch error, falling back to mock data:', error);
     return {
-      id,
-      created_at: new Date().toISOString(),
-      intake_answers_json: { role: 'uvm', timeline: 6, skills: [] },
-      roadmap_data_json: [
+      stages: [
         {
-          month: 1,
-          theme: 'Digital Logic & Verilog Foundations',
-          milestones: [
-            { text: 'Complete all 17 Beginner Verilog Playground problems (gates → flip-flops → counters)', type: 'playground' },
-            { text: 'Play Gate Rush Chapters 1–2 (basic gates, combinational circuits) — same concepts, game format, reinforces intuition', type: 'playground' },
-            { text: 'Build first portfolio project: 4-bit ripple carry adder + testbench (self-checking, directed tests only — no UVM yet)', type: 'portfolio' },
-            { text: 'Read/watch: intro material on Verilog data types, procedural blocks, and simulation basics', type: 'reading' },
-            { text: 'Skill Gap: Supplementary week on number representation (2\'s complement, overflow) before starting gates.', type: 'reading' }
+          id: 's1',
+          name: 'Architecture & Spec',
+          duration: '2-4 Weeks',
+          tasks: [
+            { id: 't1', text: 'Define microarchitecture and pipeline depth.' },
+            { id: 't2', text: 'Document target protocols and register maps.' },
+            { id: 't3', text: 'Establish power, performance, and area (PPA) targets.' }
           ]
         },
         {
-          month: 2,
-          theme: 'FSMs, Protocols, and SystemVerilog Basics',
-          milestones: [
-            { text: 'Complete Intermediate Verilog Playground problems tagged `fsm` and `uart` (traffic light FSM, sequence detector, UART TX/RX)', type: 'playground' },
-            { text: 'Portfolio project: UART controller (transmitter + receiver, directed testbench)', type: 'portfolio' },
-            { text: 'Start SystemVerilog Beginner Playground track: data types (`logic` vs `reg` vs `wire`), `always_comb`/`always_ff`, enums, structs', type: 'playground' },
-            { text: 'Certification checkpoint: begin an entry-level VLSI/SystemVerilog fundamentals certification (industry-recognized, self-paced)', type: 'certification' },
-            { text: 'Skill Gap: Moore vs Mealy comparison exercise before the sequence-detector problems.', type: 'reading' }
+          id: 's2',
+          name: 'RTL Design',
+          duration: '4-8 Weeks',
+          riskFlag: 'CDC complexity requires structural checking before simulation.',
+          tasks: [
+            { id: 't4', text: 'Implement core datapaths and FSMs in SystemVerilog.' },
+            { id: 't5', text: 'Integrate standard protocol interfaces.' },
+            { id: 't6', text: 'Run initial Lint and CDC (Clock Domain Crossing) checks.' }
           ]
         },
         {
-          month: 3,
-          theme: 'Memory, FIFOs, and CDC Fundamentals',
-          milestones: [
-            { text: 'Complete Intermediate Verilog problems tagged `fifo`, `cdc`, `memory`', type: 'playground' },
-            { text: 'Portfolio project: Synchronous + Asynchronous FIFO with Gray-code CDC synchronization — this becomes a flagship portfolio piece', type: 'portfolio' },
-            { text: 'Continue SystemVerilog Beginner/Intermediate: interfaces, modports, generate blocks', type: 'playground' },
-            { text: 'Watch/read a focused deep-dive on metastability and 2-flop synchronizers (this is a common interview topic — flag it explicitly)', type: 'reading' },
-            { text: 'Skill Gap: This month\'s CDC content is mandatory, not optional, regardless of pace.', type: 'reading' }
+          id: 's3',
+          name: 'Verification (DV)',
+          duration: '6-12 Weeks',
+          tasks: [
+            { id: 't7', text: 'Develop UVM testbench architecture.' },
+            { id: 't8', text: 'Implement constrained-random sequences.' },
+            { id: 't9', text: 'Achieve 100% Functional and Code Coverage.' }
           ]
         },
         {
-          month: 4,
-          theme: 'Entering Verification: OOP, Randomization, Coverage',
-          milestones: [
-            { text: 'Complete SystemVerilog Intermediate Playground problems tagged `oop`, `randomization`, `coverage`, `assertions`', type: 'playground' },
-            { text: 'Portfolio project: build a constrained-random self-checking testbench for the Month 3 FIFO project (retrofit it — don\'t start a new design)', type: 'portfolio' },
-            { text: 'Learn: classes, inheritance, `rand`/`randc`, basic constraints, covergroups/coverpoints, immediate + concurrent SVA', type: 'reading' },
-            { text: 'Certification checkpoint: complete the SystemVerilog fundamentals certification started in Month 2', type: 'certification' }
+          id: 's4',
+          name: 'Synthesis & Timing',
+          duration: '3-5 Weeks',
+          riskFlag: 'Timing closure risk high due to target frequency.',
+          tasks: [
+            { id: 't10', text: 'Synthesize RTL to gate-level netlist.' },
+            { id: 't11', text: 'Resolve setup and hold timing violations.' },
+            { id: 't12', text: 'Perform Formal Equivalence Checking (Logic Equivalency).' }
           ]
         },
         {
-          month: 5,
-          theme: 'UVM Core Components',
-          milestones: [
-            { text: 'Complete SystemVerilog Advanced Playground problems tagged `uvm` (sequence item, sequence/sequencer, driver, monitor, scoreboard skeletons)', type: 'playground' },
-            { text: 'Portfolio project: build a layered UVM testbench for an AMBA-APB slave — driver, monitor, sequencer, scoreboard, agent', type: 'portfolio' },
-            { text: 'Learn: TLM analysis ports, `config_db`, factory overrides, virtual interfaces, UVM phasing (build/connect/run)', type: 'reading' },
-            { text: 'Skill Gap: Add an extra week reviewing the driver/monitor split before attempting the full agent.', type: 'reading' }
+          id: 's5',
+          name: 'Physical Design (P&R)',
+          duration: '4-8 Weeks',
+          tasks: [
+            { id: 't13', text: 'Floorplanning and power grid design.' },
+            { id: 't14', text: 'Clock Tree Synthesis (CTS) and routing.' },
+            { id: 't15', text: 'Physical verification (DRC & LVS signoff).' }
           ]
         },
         {
-          month: 6,
-          theme: 'Formal Verification, Interview Readiness, and Portfolio Polish',
-          milestones: [
-            { text: 'Complete remaining SystemVerilog Advanced problems tagged `formal`, `sva` (no-read-before-write, mutual exclusion properties)', type: 'playground' },
-            { text: 'Portfolio project: add SVA formal properties to the Month 5 APB testbench — pairs formal + simulation-based verification on the same design', type: 'portfolio' },
-            { text: 'Use the RTL-DV Interview Coach tool (UVM Verification track, Associate difficulty) for at least 3 mock sessions', type: 'playground' },
-            { text: 'Use the RTL Code Reviewer tool on all portfolio projects before publishing to GitHub — clean up flagged CDC/latch/blocking-assignment issues', type: 'playground' },
-            { text: 'Finalize GitHub portfolio: 4 projects minimum (adder, UART, async FIFO, UVM APB testbench), each with a README, waveform screenshots, and coverage summary', type: 'portfolio' },
-            { text: 'Certification checkpoint: complete or begin an advanced RTL/UVM verification certification if timeline allows', type: 'certification' }
+          id: 's6',
+          name: 'Tape-out',
+          duration: '1 Week',
+          tasks: [
+            { id: 't16', text: 'Final GDSII generation.' },
+            { id: 't17', text: 'Transfer database to foundry.' }
           ]
         }
       ]

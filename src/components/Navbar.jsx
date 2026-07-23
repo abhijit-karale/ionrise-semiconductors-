@@ -22,10 +22,11 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Services', path: '/services' },
-    { name: 'Industries', path: '/industries' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Career Roadmap', path: '/roadmap' },
-    { name: 'Tech', path: '/technology' },
+    { name: 'Products', path: '/products' },
+    { name: 'IP Cores', path: '/ip-cores' },
+    { name: 'Design Flow', path: '/design-flow' },
+    { name: 'Partners', path: '/partners' },
+    { name: 'Datasheets', path: '/datasheets' },
     { name: 'Pricing', path: '/pricing' },
     { name: 'Team', path: '/team' }
   ];
