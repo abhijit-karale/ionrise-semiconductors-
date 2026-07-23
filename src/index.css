@@ -25,6 +25,28 @@
   --glow-gold: 0 0 15px rgba(245, 185, 66, 0.4);
 }
 
+:root[data-theme="light"] {
+  --bg-color: #F8FAFC;
+  --bg-color-alpha: rgba(248, 250, 252, 0.9);
+  --surface-color: rgba(255, 255, 255, 0.8);
+  --surface-border: rgba(0, 0, 0, 0.1);
+  
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  
+  --accent-teal: #0D9488;
+  --accent-blue: #2563EB;
+  --accent-gold: #D97706;
+  --pcb-green: #16A34A;
+  --wafer-silver: #64748B;
+  --error-red: #DC2626;
+
+  /* Glows */
+  --glow-teal: 0 4px 15px rgba(13, 148, 136, 0.2);
+  --glow-blue: 0 4px 15px rgba(37, 99, 235, 0.2);
+  --glow-gold: 0 4px 15px rgba(217, 119, 6, 0.2);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

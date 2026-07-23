@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Cpu, Menu, X, ChevronDown } from 'lucide-react';
+import { Cpu, Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [theme, setTheme] = useState('dark');
   const location = useLocation();
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -115,7 +120,24 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="nav-actions desktop-only">
+        <div className="nav-actions desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <button 
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            style={{ 
+              background: 'transparent', 
+              border: 'none', 
+              color: 'var(--text-main)', 
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '0.5rem',
+              borderRadius: '50%'
+            }}
+            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+          >
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
           <Link to="/contact" className="btn btn-primary">Initiate Handshake</Link>
         </div>
 
@@ -143,6 +165,25 @@ const Navbar = () => {
               </div>
             </div>
           ))}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '1rem' }}>
+            <button 
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              style={{ 
+                background: 'transparent', 
+                border: '1px solid var(--surface-border)', 
+                color: 'var(--text-main)', 
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0.5rem',
+                borderRadius: '4px',
+                flex: 1
+              }}
+            >
+              {theme === 'dark' ? <><Sun size={20} style={{marginRight: '0.5rem'}}/> Light Mode</> : <><Moon size={20} style={{marginRight: '0.5rem'}}/> Dark Mode</>}
+            </button>
+          </div>
           <Link to="/contact" className="btn btn-primary mobile-cta">Initiate Handshake</Link>
         </div>
       )}
