@@ -9,38 +9,46 @@ const Academy = () => {
   const [processing, setProcessing] = useState(false);
 
   // Curriculum Generation
-  const curriculum = Array.from({ length: 30 }, (_, i) => {
+  const curriculum = Array.from({ length: 45 }, (_, i) => {
     const day = i + 1;
     let title = '';
     let category = '';
+    let xp = 0;
+    let level = '';
     
     if (day <= 5) {
+      level = 'Level 1: Novice';
+      xp = 100;
       category = 'Verilog Fundamentals';
       const topics = ['Intro to Digital Design', 'Logic Gates & Modules', 'Combinational Logic (Always)', 'Sequential Logic & D-FFs', 'FSM Design Basics'];
       title = topics[i];
-    } else if (day <= 10) {
-      category = 'Advanced RTL Design';
-      const topics = ['Parameterization', 'Generate Blocks', 'Memory Models', 'CDC Synchronizers', 'Arithmetic Pipelines'];
-      title = topics[i - 5];
     } else if (day <= 15) {
-      category = 'SystemVerilog Basics';
-      const topics = ['Data Types & Structs', 'Interfaces & Modports', 'SV Assertions (SVA)', 'Functional Coverage', 'Class-Based OOP'];
-      title = topics[i - 10];
-    } else if (day <= 20) {
-      category = 'SV Verification';
-      const topics = ['Inheritance & Polymorphism', 'Randomization (Constraints)', 'Mailboxes & Semaphores', 'Virtual Interfaces', 'Testbench Architecture'];
-      title = topics[i - 15];
+      level = 'Level 2: Apprentice';
+      xp = 150;
+      category = 'Advanced RTL Design';
+      const topics = ['Parameterization', 'Generate Blocks', 'Memory Models', 'CDC Synchronizers', 'Arithmetic Pipelines', 'AXI4-Lite Basics', 'UART Implementation', 'SPI Protocol Design', 'I2C Master Controller', 'FIFO Design & Verification'];
+      title = topics[i - 5];
     } else if (day <= 25) {
+      level = 'Level 3: Engineer';
+      xp = 200;
+      category = 'SystemVerilog Basics';
+      const topics = ['Data Types & Structs', 'Interfaces & Modports', 'SV Assertions (SVA)', 'Functional Coverage', 'Class-Based OOP', 'Inheritance & Polymorphism', 'Randomization (Constraints)', 'Mailboxes & Semaphores', 'Virtual Interfaces', 'Testbench Architecture'];
+      title = topics[i - 15];
+    } else if (day <= 35) {
+      level = 'Level 4: Architect';
+      xp = 300;
       category = 'UVM Introduction';
-      const topics = ['UVM Phases & Macros', 'UVM Agent & Sequencer', 'UVM Driver & Monitor', 'UVM Scoreboard', 'UVM Factory'];
-      title = topics[i - 20];
-    } else {
-      category = 'Advanced UVM & Tape-out';
-      const topics = ['Register Abstraction Layer (RAL)', 'Coverage Closure Strategies', 'Formal Verification Intro', 'Gate-Level Simulation (GLS)', 'Final Project: AMBA VIP'];
+      const topics = ['UVM Phases & Macros', 'UVM Agent & Sequencer', 'UVM Driver & Monitor', 'UVM Scoreboard', 'UVM Factory', 'UVM Configuration Database', 'Register Abstraction Layer (RAL)', 'RAL Adapter & Predictor', 'Virtual Sequences', 'UVM Callbacks'];
       title = topics[i - 25];
+    } else {
+      level = 'Level 5: Master';
+      xp = 500;
+      category = 'Advanced UVM & Tape-out';
+      const topics = ['Coverage Closure Strategies', 'Formal Verification Intro', 'Gate-Level Simulation (GLS)', 'Power Aware Verification (UPF)', 'PCIe Gen4 Verification', 'Ethernet MAC Verification', 'DDR5 Memory Controller', 'Advanced Debugging with Verdi', 'Continuous Integration (CI/CD)', 'Final Project: AMBA VIP'];
+      title = topics[i - 35];
     }
 
-    return { day, title, category, isFree: day <= 5 };
+    return { day, title, category, level, xp, isFree: day <= 5 };
   });
 
   const handleCheckout = () => {
@@ -56,7 +64,7 @@ const Academy = () => {
     <div className="page-container">
       <PageHeader 
         title="RTL Mastery Academy" 
-        subtitle="Go from absolute beginner to UVM Professional in 30 days. Play the first 5 days free." 
+        subtitle="Go from absolute beginner to UVM Professional in a 45-day gamified journey. Play the first 5 days free." 
       />
 
       <section className="section" style={{ paddingTop: '2rem', paddingBottom: '6rem' }}>
@@ -64,9 +72,9 @@ const Academy = () => {
           
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '3rem', alignItems: 'start' }}>
             
-            {/* Left: 30-Day Timeline */}
+            {/* Left: 45-Day Timeline */}
             <div>
-              <h2 className="tech-text mb-4" style={{ fontSize: '1.2rem' }}>// CURRICULUM_PATH</h2>
+              <h2 className="tech-text mb-4" style={{ fontSize: '1.2rem' }}>// CURRICULUM_PATH_45_DAYS</h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative' }}>
                 {/* Vertical connecting line */}
                 <div style={{ position: 'absolute', left: '24px', top: '24px', bottom: '24px', width: '2px', background: 'var(--surface-border)', zIndex: 0 }} />
@@ -101,27 +109,32 @@ const Academy = () => {
                       <div className="glass-card" style={{ flex: 1, padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
                           <div className="tech-text" style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', marginBottom: '0.25rem' }}>
-                            Day {item.day} • {item.category}
+                            Day {item.day} • {item.level} • {item.category}
                           </div>
                           <h3 style={{ margin: 0, fontSize: '1.1rem', color: isAccessible ? 'var(--text-main)' : 'var(--text-muted)' }}>
                             {item.title}
                           </h3>
                         </div>
-                        {item.isFree && !unlocked && (
-                          <div className="status-pill verified">FREE</div>
-                        )}
-                        {!item.isFree && !unlocked && (
-                          <button 
-                            className="btn btn-outline" 
-                            style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
-                            onClick={() => setShowCheckout(true)}
-                          >
-                            Unlock
-                          </button>
-                        )}
-                        {unlocked && (
-                          <div className="status-pill verified" style={{ background: 'transparent', border: 'none' }}><CheckCircle size={20} /></div>
-                        )}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <span style={{ color: 'var(--accent-blue)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 'bold' }}>
+                            +{item.xp} XP
+                          </span>
+                          {item.isFree && !unlocked && (
+                            <div className="status-pill verified">FREE</div>
+                          )}
+                          {!item.isFree && !unlocked && (
+                            <button 
+                              className="btn btn-outline" 
+                              style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
+                              onClick={() => setShowCheckout(true)}
+                            >
+                              Unlock
+                            </button>
+                          )}
+                          {unlocked && (
+                            <div className="status-pill verified" style={{ background: 'transparent', border: 'none' }}><CheckCircle size={20} /></div>
+                          )}
+                        </div>
                       </div>
                     </motion.div>
                   );
@@ -144,7 +157,7 @@ const Academy = () => {
                       <h2 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-main)' }}>Pro Access</h2>
                     </div>
                     <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.6 }}>
-                      Unlock the remaining 25 days to master SystemVerilog OOP, UVM constraints, and Formal Verification.
+                      Unlock the remaining 40 days to master SystemVerilog OOP, UVM constraints, and earn XP to reach Level 5 Master rank.
                     </p>
                     <div style={{ fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>
                       ₹199 <span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400 }}>INR</span>
@@ -166,7 +179,7 @@ const Academy = () => {
                       <h2 style={{ margin: 0, fontSize: '1.5rem', color: 'var(--text-main)' }}>Pro Unlocked</h2>
                     </div>
                     <p style={{ color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                      You now have full access to all 30 days of the Verilog & SystemVerilog curriculum.
+                      You now have full access to all 45 days of the gamified Verilog & SystemVerilog curriculum.
                     </p>
                     <button className="btn btn-outline" style={{ width: '100%', marginTop: '2rem' }}>
                       Go to Dashboard
@@ -215,7 +228,7 @@ const Academy = () => {
               <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginBottom: '2rem' }}>Secure checkout via Stripe</p>
               
               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
-                <span style={{ color: 'var(--text-main)' }}>30-Day Academy Access</span>
+                <span style={{ color: 'var(--text-main)' }}>45-Day Gamified Access</span>
                 <span style={{ color: 'var(--accent-teal)', fontWeight: 'bold' }}>₹199.00</span>
               </div>
               
