@@ -19,6 +19,7 @@ import Products from './pages/Products';
 import Partners from './pages/Partners';
 import Datasheets from './pages/Datasheets';
 import DesignFlow from './pages/DesignFlow';
+import Academy from './pages/Academy';
 import { Cpu } from 'lucide-react';
 
 const PageTransition = ({ children }) => {
@@ -90,6 +91,7 @@ const AppRoutes = () => {
         <Route path="/datasheets" element={<Datasheets />} />
         <Route path="/design-flow" element={<DesignFlow />} />
         <Route path="/design-flow/f/:id" element={<DesignFlow />} />
+        <Route path="/academy" element={<Academy />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
       </Routes>
