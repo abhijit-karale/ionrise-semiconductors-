@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import PageHeader from '../components/PageHeader';
-import { Linkedin, Twitter, Github } from 'lucide-react';
+import { Briefcase, MessageCircle, Code } from 'lucide-react';
 import './Team.css';
 
 const Team = () => {
@@ -29,9 +29,9 @@ const Team = () => {
                   to the world of hardware engineering.
                 </p>
                 <div className="founder-socials">
-                  <a href="#" className="social-icon"><Linkedin size={20}/></a>
-                  <a href="#" className="social-icon"><Github size={20}/></a>
-                  <a href="#" className="social-icon"><Twitter size={20}/></a>
+                  <a href="#" className="social-icon"><Briefcase size={20}/></a>
+                  <a href="#" className="social-icon"><Code size={20}/></a>
+                  <a href="#" className="social-icon"><MessageCircle size={20}/></a>
                 </div>
               </div>
             </div>

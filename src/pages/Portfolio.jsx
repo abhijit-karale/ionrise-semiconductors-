@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import { fetchGithubRepos } from '../services/GitHubApi';
-import { Star, GitCommit, ExternalLink, Github } from 'lucide-react';
+import { Star, GitCommit, ExternalLink, Code } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import './Portfolio.css';
 
@@ -51,7 +51,7 @@ const Portfolio = () => {
                     <div className="card-header">
                       <h3 className="repo-name">{repo.name}</h3>
                       <a href={repo.html_url} target="_blank" rel="noreferrer" className="github-link">
-                        <Github size={20} />
+                        <Code size={20} />
                       </a>
                     </div>
                     

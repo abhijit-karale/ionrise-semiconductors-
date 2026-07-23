@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Cpu, Zap, Activity, Grid } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import CountUp from 'react-countup';
+import CountUpPkg from 'react-countup';
+const CountUp = CountUpPkg.default || CountUpPkg;
 import './Home.css';
 
 const Home = () => {

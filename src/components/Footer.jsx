@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Cpu, Twitter, Linkedin, Github } from 'lucide-react';
+import { Cpu, MessageCircle, Briefcase, Code } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
@@ -16,9 +16,9 @@ const Footer = () => {
             Next-generation semiconductor technology powering the future of AI and high-performance computing.
           </p>
           <div className="social-links">
-            <a href="#" className="social-link"><Twitter size={20} /></a>
-            <a href="#" className="social-link"><Linkedin size={20} /></a>
-            <a href="#" className="social-link"><Github size={20} /></a>
+            <a href="#" className="social-link"><MessageCircle size={20} /></a>
+            <a href="#" className="social-link"><Briefcase size={20} /></a>
+            <a href="#" className="social-link"><Code size={20} /></a>
           </div>
         </div>
 
