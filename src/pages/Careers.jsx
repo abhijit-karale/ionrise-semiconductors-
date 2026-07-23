@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { submitApplication } from '../services/api';
 import PageHeader from '../components/PageHeader';
 import { CheckCircle2, ChevronRight } from 'lucide-react';
 import './Careers.css';
 
 const Careers = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', role: '', linkedin_url: '', cover_letter: '' });
+  const [status, setStatus] = useState('idle');
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setStatus('submitting');
+      await submitApplication(formData);
+      setStatus('success');
+      setFormData({ name: '', email: '', role: '', linkedin_url: '', cover_letter: '' });
+    } catch (error) {
+      console.error("Error submitting application: ", error);
+      setStatus('error');
+    }
+  };
   const benefits = [
     'Top-tier compensation and early-stage equity.',
     'Remote-first culture with hubs in San Jose & Austin.',
@@ -65,37 +85,50 @@ const Careers = () => {
               <h2 className="tech-text mb-4">// APPLY_NOW</h2>
               
               <div className="glass-card form-card">
-                <form className="application-form">
-                  <div className="form-group">
-                    <label>Full Name</label>
-                    <input type="text" required />
+                {status === 'success' ? (
+                  <div className="success-message text-center p-4">
+                    <h3 className="mb-3">Application Received</h3>
+                    <p style={{ color: 'var(--text-muted)' }}>We will review your profile and get back to you soon.</p>
+                    <button type="button" className="btn btn-outline mt-4" onClick={() => setStatus('idle')}>
+                      Submit Another
+                    </button>
                   </div>
-                  <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Target Role</label>
-                    <select className="form-input" required>
-                      <option value="">Select a role...</option>
-                      <option value="uvm">Senior UVM Engineer</option>
-                      <option value="formal">Formal Verification Lead</option>
-                      <option value="rtl">RTL Design Architect</option>
-                      <option value="other">General Application</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label>LinkedIn / GitHub URL</label>
-                    <input type="url" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Why Corevexis?</label>
-                    <textarea rows="4" required></textarea>
-                  </div>
-                  <button type="button" className="btn btn-primary w-100">
-                    Submit Application <ChevronRight size={18} />
-                  </button>
-                </form>
+                ) : (
+                  <form className="application-form" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                      <label>Full Name</label>
+                      <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+                    </div>
+                    <div className="form-group">
+                      <label>Email</label>
+                      <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+                    </div>
+                    <div className="form-group">
+                      <label>Target Role</label>
+                      <select name="role" className="form-input" value={formData.role} onChange={handleChange} required>
+                        <option value="">Select a role...</option>
+                        <option value="uvm">Senior UVM Engineer</option>
+                        <option value="formal">Formal Verification Lead</option>
+                        <option value="rtl">RTL Design Architect</option>
+                        <option value="other">General Application</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label>LinkedIn / GitHub URL</label>
+                      <input type="url" name="linkedin_url" value={formData.linkedin_url} onChange={handleChange} required />
+                    </div>
+                    <div className="form-group">
+                      <label>Why Ionrise?</label>
+                      <textarea name="cover_letter" rows="4" value={formData.cover_letter} onChange={handleChange} required></textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary w-100" disabled={status === 'submitting'}>
+                      {status === 'submitting' ? 'Submitting...' : 'Submit Application'} <ChevronRight size={18} />
+                    </button>
+                    {status === 'error' && (
+                      <p className="error-text mt-3">Submission failed. Please try again later.</p>
+                    )}
+                  </form>
+                )}
               </div>
             </motion.div>
           </div>

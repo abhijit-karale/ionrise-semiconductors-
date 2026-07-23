@@ -1,0 +1,52 @@
+CREATE TABLE IF NOT EXISTS projects (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  tags TEXT[] NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS blog_posts (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  excerpt TEXT NOT NULL,
+  content TEXT NOT NULL,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  read_time VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS contacts (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  company VARCHAR(255),
+  message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS applications (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  linkedin_url VARCHAR(255),
+  portfolio_url VARCHAR(255),
+  cover_letter TEXT,
+  role VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS roadmap_templates (
+  id SERIAL PRIMARY KEY,
+  role VARCHAR(255) NOT NULL,
+  timeline INT NOT NULL,
+  month_number INT NOT NULL,
+  theme VARCHAR(255) NOT NULL,
+  milestones_json JSONB NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_roadmaps (
+  id VARCHAR(255) PRIMARY KEY,
+  intake_answers_json JSONB NOT NULL,
+  roadmap_data_json JSONB NOT NULL,
+  email_optional VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

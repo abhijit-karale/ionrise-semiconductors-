@@ -22,10 +22,11 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Services', path: '/services' },
-    { name: 'Process', path: '/process' },
+    { name: 'Industries', path: '/industries' },
     { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Career Roadmap', path: '/roadmap' },
     { name: 'Tech', path: '/technology' },
-    { name: 'About', path: '/about' },
+    { name: 'Pricing', path: '/pricing' },
     { name: 'Team', path: '/team' }
   ];
 
@@ -34,7 +35,7 @@ const Navbar = () => {
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo">
           <Cpu className="logo-icon" size={28} />
-          <span className="logo-text">Corevexis</span>
+          <span className="logo-text">Ionrise</span>
         </Link>
 
         {/* Desktop Nav */}

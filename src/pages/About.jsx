@@ -6,10 +6,14 @@ import './About.css';
 
 const About = () => {
   const timeline = [
-    { year: '2024', title: 'Corevexis Founded', desc: 'Established in stealth mode with a seed round of $12M led by deep-tech VCs.' },
-    { year: '2025', title: 'First Silicon Success', desc: 'Successfully taped out our first internally verified RISC-V edge accelerator.' },
-    { year: '2026', title: 'UVM Framework Launch', desc: 'Released our proprietary coverage-driven UVM framework for rapid verification.' },
-    { year: '2027', title: 'Series A', desc: 'Scaling the team to support Tier-1 datacenters and automotive clients.' }
+    { year: '2020–2023', title: 'Diploma in Electrical Engineering', desc: 'Baramati, Pune (71.39%)' },
+    { year: '2023–2026', title: 'B.Tech, E&TC Engineering', desc: 'MAEER\'s MIT College of Railway Engineering & Research, Barshi (CGPA 7.86)' },
+    { year: 'Aug–Nov 2024', title: 'Analog IC Design Internship', desc: 'Saksham Semiconductors, Hyderabad (MOSFET characterization, current mirrors, differential amps)' },
+    { year: 'Dec 2024–Mar 2025', title: 'RTL Design & Verification Training', desc: 'The Silicon Sandbox, Bangalore' },
+    { year: 'Mar 2025–Mar 2026', title: 'Embedded Systems Engineer', desc: 'Minilec India Pvt. Ltd., Pune' },
+    { year: 'Mar 2026–Present', title: 'Embedded Firmware Engineer', desc: 'Velastra Pvt. Ltd., Ahmedabad' },
+    { year: '2026', title: 'Ionrise Founded', desc: 'Ionrise Semiconductors established to provide simulation-proven RTL/DV services.' },
+    { year: 'Dec 2026', title: 'Advanced RTL/DV Program', desc: 'Target completion, The Silicon Sandbox' }
   ];
 
   return (
@@ -28,15 +32,17 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="tech-text mb-4">// OUR_MISSION</h2>
+              <h2 className="tech-text mb-4">// THE_FOUNDER</h2>
               <p className="large-text">
-                Silicon design is notoriously difficult, expensive, and prone to catastrophic failure. 
-                At Corevexis, we bring modern software engineering principles to hardware design.
+                Ionrise Semiconductors was founded by <strong>Abhijit Karale</strong>, an RTL Design & Verification engineer based in Ahmedabad, India.
               </p>
               <p>
-                By integrating continuous integration, exhaustive formal verification, and automated 
-                coverage closure, we dramatically reduce time-to-market for complex SoCs while ensuring 
-                first-pass silicon success. We don't just write Verilog; we engineer bulletproof logic.
+                With a background spanning embedded firmware, analog circuit design, and digital hardware verification, Abhijit has designed and verified digital logic from FSMs to a full 5-stage pipelined RISC-V core. He brings hands-on experience with industry EDA flows including Cadence Xcelium, JasperGold, Synopsys Design Compiler, and Vivado.
+              </p>
+              
+              <h2 className="tech-text mb-4" style={{marginTop: '2rem'}}>// OUR_MISSION</h2>
+              <p>
+                To deliver simulation-verified, coverage-closed RTL and verification IP that teams can trust at tape-out — built with the same rigor as a production verification team, at startup speed.
               </p>
             </motion.div>
             
@@ -49,22 +55,8 @@ const About = () => {
               <div className="stat-row">
                 <Cpu size={32} className="stat-icon" />
                 <div>
-                  <h4>10M+</h4>
-                  <p>Gate Counts Supported</p>
-                </div>
-              </div>
-              <div className="stat-row">
-                <Rocket size={32} className="stat-icon" />
-                <div>
-                  <h4>5x</h4>
-                  <p>Faster Coverage Closure</p>
-                </div>
-              </div>
-              <div className="stat-row">
-                <Code size={32} className="stat-icon" />
-                <div>
-                  <h4>100%</h4>
-                  <p>UVM Compliant</p>
+                  <h4>Why "Ionrise"?</h4>
+                  <p>A blend of "core" (silicon processor core) and "vertex" (the apex), signaling precision at the absolute core of every design.</p>
                 </div>
               </div>
             </motion.div>

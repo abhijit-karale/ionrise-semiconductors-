@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import { fetchGithubRepos } from '../services/GitHubApi';
+import { fetchProjectsFromDb } from '../services/api';
 import { Star, GitCommit, ExternalLink, Code } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import './Portfolio.css';
@@ -10,13 +11,61 @@ const Portfolio = () => {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [dbProjects, setDbProjects] = useState([]);
+
+  // The 6 seed projects requested
+  const seedProjects = [
+    { 
+      title: '32-bit RISC-V Processor Design & Verification', 
+      desc: '5-stage pipeline with full UVM environment (driver, monitor, scoreboard, constrained-random sequences). 95%+ functional coverage; hazards resolved via forwarding. Synthesized via Synopsys tools.', 
+      tags: ['Verilog', 'UVM', 'Cadence Xcelium'] 
+    },
+    { 
+      title: '8-bit RISC Processor — Complete ASIC Flow', 
+      desc: '32-instruction RISC architecture, RTL to gate level. Floorplanning, place & route, DFT insertion, synthesis, static timing closure. 100% sim coverage across 350+ tests. Validated on FPGA at 100 MHz.', 
+      tags: ['Verilog', 'VHDL', 'FPGA'] 
+    },
+    { 
+      title: 'AMBA APB Slave Peripheral', 
+      desc: 'Address decoding, register mapping, read/write control logic. FSM modeling IDLE/SETUP/ACCESS phases per spec. Full functional coverage closure.', 
+      tags: ['SystemVerilog', 'AMBA-APB'] 
+    },
+    { 
+      title: 'UART Controller RTL & Verification', 
+      desc: 'Configurable TX/RX, variable baud rates and parity modes. SVA-based protocol timing checks. Robustness validated against noise, baud mismatch, back-to-back frames.', 
+      tags: ['Verilog', 'SystemVerilog'] 
+    },
+    { 
+      title: 'Synchronous & Asynchronous FIFO Design', 
+      desc: 'Parameterizable sync/async FIFOs with full/empty flag logic. Gray-code pointer synchronization for safe CDC. Self-checking testbenches for boundary conditions.', 
+      tags: ['Verilog', 'SystemVerilog', 'CDC'] 
+    },
+    { 
+      title: 'Memory Controller with Formal Property Verification', 
+      desc: 'Single-port read/write memory controller, address range checking. SVA for address decoding, reset behavior. Properties formally proven in JasperGold.', 
+      tags: ['SystemVerilog', 'SVA', 'JasperGold'] 
+    }
+  ];
+
   useEffect(() => {
-    const loadRepos = async () => {
-      const data = await fetchGithubRepos();
-      setRepos(data);
+    const loadData = async () => {
+      const ghData = await fetchGithubRepos();
+      setRepos(ghData);
+      
+      try {
+        const dbData = await fetchProjectsFromDb();
+        if (dbData && dbData.length > 0) {
+          setDbProjects(dbData);
+        } else {
+          setDbProjects(seedProjects);
+        }
+      } catch (err) {
+        setDbProjects(seedProjects);
+      }
+      
       setLoading(false);
     };
-    loadRepos();
+    loadData();
   }, []);
 
   return (
@@ -79,12 +128,7 @@ const Portfolio = () => {
           <div className="portfolio-hardcoded mt-5">
             <h2 className="section-title">Case Studies</h2>
             <div className="portfolio-grid">
-              {/* Hardcoded case studies for the specific requests (NTT accelerator, RISC-V core) */}
-              {[
-                { title: 'NTT Accelerator', desc: 'Number Theoretic Transform hardware accelerator for post-quantum cryptography.', tags: ['SystemVerilog', 'UVM', 'Yosys'] },
-                { title: 'RISC-V Core', desc: 'Out-of-order superscalar RV64GC core tailored for edge AI inference.', tags: ['Verilog', 'Formal', 'Verilator'] },
-                { title: 'APB Peripherals', desc: 'High-speed UART and FIFO buffers connected via AMBA APB bus.', tags: ['RTL', 'UVM'] }
-              ].map((study, idx) => (
+              {dbProjects.map((study, idx) => (
                 <Tilt key={`study-${idx}`} tiltMaxAngleX={5} tiltMaxAngleY={5} className="tilt-wrapper">
                   <div className="portfolio-card glass-card study-card">
                     <h3>{study.title}</h3>

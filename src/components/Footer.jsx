@@ -10,15 +10,15 @@ const Footer = () => {
         <div className="footer-brand">
           <Link to="/" className="footer-logo">
             <Cpu className="logo-icon" size={28} />
-            <span className="logo-text">Corevexis</span>
+            <span className="logo-text">Ionrise</span>
           </Link>
           <p className="footer-desc">
             Next-generation semiconductor technology powering the future of AI and high-performance computing.
           </p>
           <div className="social-links">
-            <a href="#" className="social-link"><MessageCircle size={20} /></a>
-            <a href="#" className="social-link"><Briefcase size={20} /></a>
-            <a href="#" className="social-link"><Code size={20} /></a>
+            <a href="mailto:hello@ionrise-semiconductors.com" className="social-link" title="Email Us"><MessageCircle size={20} /></a>
+            <a href="https://www.linkedin.com/company/ionrise-semiconductors/" target="_blank" rel="noreferrer" className="social-link" title="LinkedIn"><Briefcase size={20} /></a>
+            <a href="https://github.com/abhijit-karale" target="_blank" rel="noreferrer" className="social-link" title="GitHub"><Code size={20} /></a>
           </div>
         </div>
 
@@ -49,7 +49,7 @@ const Footer = () => {
       
       <div className="footer-bottom">
         <div className="container">
-          <p>&copy; {new Date().getFullYear()} Corevexis Semiconductor. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Ionrise Semiconductors. All rights reserved.</p>
         </div>
       </div>
     </footer>

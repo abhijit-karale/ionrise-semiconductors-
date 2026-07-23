@@ -46,8 +46,8 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                SILICON FABRICATION <br />
-                <span className="accent-teal">RE-ENGINEERED</span>
+                From gate-level RTL <br />
+                <span className="accent-teal">to silicon reality</span>
               </motion.h1>
               <motion.p 
                 className="hero-subtitle"
@@ -55,8 +55,7 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                Corevexis provides cutting-edge RTL Design and UVM Verification. 
-                We bring extreme reliability and performance to your custom silicon architectures.
+                Ionrise Semiconductors designs and verifies digital hardware — from protocol peripherals to pipelined processors — with simulation-proven, coverage-closed RTL.
               </motion.p>
               <motion.div 
                 className="hero-cta"
@@ -124,9 +123,21 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <div className="stat-number">
-                <CountUp end={100} duration={2} suffix="%" />
+                <CountUp end={95} duration={2} suffix="%+" />
               </div>
-              <div className="stat-label tech-text">Coverage Closure</div>
+              <div className="stat-label tech-text">Functional Coverage (RISC-V UVM)</div>
+            </motion.div>
+            <motion.div 
+              className="stat-card glass-card"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="stat-number">
+                <CountUp end={350} duration={2.5} suffix="+" />
+              </div>
+              <div className="stat-label tech-text">Directed & Random Tests (ASIC)</div>
             </motion.div>
             <motion.div 
               className="stat-card glass-card"
@@ -136,21 +147,21 @@ const Home = () => {
               transition={{ delay: 0.2 }}
             >
               <div className="stat-number">
-                <CountUp end={42} duration={2.5} suffix="+" />
+                <CountUp end={7} duration={2} />
               </div>
-              <div className="stat-label tech-text">Tapeouts Supported</div>
+              <div className="stat-label tech-text">RTL/DV Projects Shipped</div>
             </motion.div>
             <motion.div 
               className="stat-card glass-card"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.3 }}
             >
               <div className="stat-number">
-                <CountUp end={0} duration={2} suffix=" DPPM" />
+                <CountUp end={100} duration={2} suffix=" MHz" />
               </div>
-              <div className="stat-label tech-text">Defect Rate target</div>
+              <div className="stat-label tech-text">Validated FPGA Implementation</div>
             </motion.div>
           </div>
         </div>
@@ -165,15 +176,15 @@ const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Core Competencies
+            Featured Services
           </motion.h2>
           
           <div className="value-grid">
             {[
-              { icon: Cpu, title: 'RTL Design', desc: 'Microarchitecture to synthesis. Verilog, SystemVerilog, VHDL.' },
-              { icon: Activity, title: 'UVM Verification', desc: 'Robust testbenches, constrained random, coverage-driven verification.' },
-              { icon: Grid, title: 'Formal Verification', desc: 'Mathematical proofs for critical logic paths ensuring absolute correctness.' },
-              { icon: Zap, title: 'DFT & Signoff', desc: 'Design for testability, STA, and logical equivalence checking.' }
+              { icon: Cpu, title: 'RTL Design', desc: 'Verilog, SystemVerilog, VHDL, FSMs, datapath & controller design.' },
+              { icon: Activity, title: 'UVM Verification', desc: 'Layered testbenches, constrained-random verification, coverage closure.' },
+              { icon: Grid, title: 'Formal Verification', desc: 'SVA + JasperGold property proving for critical logic paths.' },
+              { icon: Zap, title: 'Embedded Firmware & Bring-up', desc: 'Embedded C, FreeRTOS, peripheral drivers, and hardware bring-up.' }
             ].map((item, index) => (
               <motion.div 
                 key={index}
@@ -189,8 +200,47 @@ const Home = () => {
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
+                <Link to="/services" className="tech-text" style={{ display: 'inline-flex', alignItems: 'center', marginTop: '1rem', gap: '0.5rem' }}>
+                  Learn more <ArrowRight size={14} />
+                </Link>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects Preview */}
+      <section className="projects-preview section" style={{ background: 'rgba(230, 237, 243, 0.02)' }}>
+        <div className="container">
+          <motion.h2 
+            className="section-title"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            Featured Projects
+          </motion.h2>
+          <div className="value-grid">
+            {[
+              { title: '32-bit RISC-V Processor', desc: '5-stage pipeline, 95%+ coverage, UVM environment.' },
+              { title: 'Sync/Async FIFO', desc: 'Gray-code CDC, parameterizable depth.' },
+              { title: 'AMBA-APB Slave Peripheral', desc: 'Address decoding, access phases, coverage closure.' }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                className="glass-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <h3 style={{ color: 'var(--accent-blue)', marginBottom: '0.5rem' }}>{item.title}</h3>
+                <p style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <Link to="/portfolio" className="btn btn-outline">View Full Portfolio</Link>
           </div>
         </div>
       </section>

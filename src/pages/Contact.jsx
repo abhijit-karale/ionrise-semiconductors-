@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { submitContactForm } from '../services/api';
 import PageHeader from '../components/PageHeader';
 import { Send, MapPin, Calendar, Mail } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', company: '', projectType: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
 
   const handleChange = (e) => {
@@ -16,21 +15,11 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!db) {
-      // Mock successful submission if Firebase config is missing
-      setStatus('submitting');
-      setTimeout(() => setStatus('success'), 1500);
-      return;
-    }
-
     try {
       setStatus('submitting');
-      await addDoc(collection(db, "contacts"), {
-        ...formData,
-        timestamp: new Date()
-      });
+      await submitContactForm(formData);
       setStatus('success');
-      setFormData({ name: '', email: '', company: '', message: '' });
+      setFormData({ name: '', email: '', company: '', projectType: '', message: '' });
     } catch (error) {
       console.error("Error submitting form: ", error);
       setStatus('error');
@@ -58,7 +47,7 @@ const Contact = () => {
                 <MapPin className="info-icon" />
                 <div>
                   <h3>Headquarters</h3>
-                  <p>123 Silicon Way<br/>San Jose, CA 95134<br/>United States</p>
+                  <p>Ahmedabad, Gujarat<br/>India</p>
                 </div>
               </div>
 
@@ -66,7 +55,7 @@ const Contact = () => {
                 <Mail className="info-icon" />
                 <div>
                   <h3>Direct Inquiry</h3>
-                  <p>tapeout@corevexis.com</p>
+                  <p>hello@ionrise-semiconductors.com</p>
                 </div>
               </div>
 
@@ -110,7 +99,19 @@ const Contact = () => {
                   
                   <div className="form-group">
                     <label>Company / Organization</label>
-                    <input type="text" name="company" value={formData.company} onChange={handleChange} required />
+                    <input type="text" name="company" value={formData.company} onChange={handleChange} />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label>Project Type</label>
+                    <select name="projectType" value={formData.projectType} onChange={handleChange} required>
+                      <option value="">Select an option</option>
+                      <option value="RTL Design">RTL Design</option>
+                      <option value="Verification">Verification</option>
+                      <option value="Formal Verification">Formal Verification</option>
+                      <option value="Embedded Firmware">Embedded Firmware</option>
+                      <option value="Other">Other</option>
+                    </select>
                   </div>
                   
                   <div className="form-group">

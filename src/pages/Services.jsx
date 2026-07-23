@@ -7,11 +7,12 @@ const Services = () => {
   const [activeBlock, setActiveBlock] = useState(null);
 
   const services = [
-    { id: 'rtl', label: 'RTL Design', desc: 'Front-end microarchitecture & logic design in SystemVerilog.' },
-    { id: 'uvm', label: 'UVM Verification', desc: 'Constrained random, coverage-driven verification using Universal Verification Methodology.' },
-    { id: 'formal', label: 'Formal Verification', desc: 'Property checking and mathematical proofs for critical control logic.' },
-    { id: 'dft', label: 'DFT / ATPG', desc: 'Design for Testability insertions, JTAG, BIST, and scan chains.' },
-    { id: 'fw', label: 'Embedded Firmware', desc: 'Bare-metal C and RTOS development closely coupled with hardware.' }
+    { id: 'rtl', label: 'RTL Design', desc: 'Verilog, SystemVerilog, VHDL, FSM design, datapath & controller design, parameterizable synchronous/asynchronous FIFOs, FPGA prototyping.' },
+    { id: 'uvm', label: 'UVM Verification', desc: 'Layered UVM testbenches — sequences, sequencers, drivers, monitors, agents, scoreboards, factory overrides, TLM. Constrained-random verification with functional and code coverage closure.' },
+    { id: 'formal', label: 'Formal Verification', desc: 'SystemVerilog Assertions (SVA) and JasperGold-based property proving for address decoding, reset behavior, and protocol compliance — exhaustive proof alongside simulation.' },
+    { id: 'protocol', label: 'Protocol & SoC Integration', desc: 'AMBA-APB, AXI4, AXI4-Lite, UART, SPI, I2C. Bus functional models and reference models for protocol-compliant peripheral verification.' },
+    { id: 'fw', label: 'Embedded Firmware & Bring-up', desc: 'Embedded C, FreeRTOS, RTOS-based task scheduling, UART/SPI/I2C/ADC/PWM drivers, STM32/ARM Cortex-M bring-up, PCB-level and signal-integrity debugging, schematic-to-board correlation.' },
+    { id: 'cdc', label: 'CDC & Timing Closure', desc: 'Clock domain crossing analysis with Gray-code pointer synchronization, timing and area trade-off analysis via synthesis tools.' }
   ];
 
   return (

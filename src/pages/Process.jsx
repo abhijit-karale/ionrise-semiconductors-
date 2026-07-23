@@ -1,16 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import PageHeader from '../components/PageHeader';
-import { FileText, Cpu, CheckSquare, ShieldCheck, Flag } from 'lucide-react';
+import { FileText, Cpu, CheckSquare, ShieldCheck, Flag, Activity, Grid, Zap } from 'lucide-react';
 import './Process.css';
 
 const Process = () => {
   const steps = [
-    { icon: FileText, title: 'Specification', desc: 'Translating architectural requirements into microarchitecture specs.' },
-    { icon: Cpu, title: 'RTL Implementation', desc: 'Coding the design in SystemVerilog, optimized for PPA.' },
-    { icon: CheckSquare, title: 'UVM Testbench', desc: 'Developing constrained-random stimulus and coverage models.' },
-    { icon: ShieldCheck, title: 'Coverage Closure', desc: 'Iterative simulation to hit 100% functional and code coverage.' },
-    { icon: Flag, title: 'Formal Signoff', desc: 'Mathematical proofs ensuring zero escape defects.' }
+    { icon: FileText, title: 'Spec Capture', desc: 'Translating architectural requirements into microarchitecture specs.' },
+    { icon: Cpu, title: 'RTL Coding', desc: '32-instruction RISC architectures and 5-stage pipelines in Verilog/VHDL.' },
+    { icon: CheckSquare, title: 'Testbench Development', desc: 'Full UVM environments: drivers, monitors, scoreboards, and sequences.' },
+    { icon: Activity, title: 'Simulation & Regression', desc: 'Running 350+ directed and constrained-random test cases.' },
+    { icon: ShieldCheck, title: 'Coverage Closure', desc: 'Hitting 95%+ to 100% functional and code coverage across testbenches.' },
+    { icon: Grid, title: 'Formal Property Signoff', desc: 'SVA and JasperGold proofs for critical logic paths ensuring absolute correctness.' },
+    { icon: Zap, title: 'Synthesis & Timing Review', desc: 'Timing and area trade-off analysis, floorplanning, and static timing closure.' },
+    { icon: Flag, title: 'Delivery', desc: 'Simulation-proven, coverage-closed RTL ready for FPGA or tapeout.' }
   ];
 
   return (

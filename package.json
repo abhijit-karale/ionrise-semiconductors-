@@ -1,9 +1,9 @@
 {
-  "name": "corevexis-semiconductor-main",
+  "name": "ionrise-semiconductors-main",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://abhijit-karale.github.io/corevexis-semiconductor",
+  "homepage": "https://abhijit-karale.github.io/ionrise-semiconductors",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

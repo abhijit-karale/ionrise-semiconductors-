@@ -16,6 +16,11 @@ import Team from './pages/Team';
 import Blog from './pages/Blog';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
+import Industries from './pages/Industries';
+import Pricing from './pages/Pricing';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import Roadmap from './pages/Roadmap';
 
 const PageTransition = ({ children }) => {
   const location = useLocation();
@@ -34,11 +39,6 @@ const PageTransition = ({ children }) => {
   );
 };
 
-const Legal = ({ title }) => (
-  <GenericPage title={title} subtitle="Standard legal documentation.">
-    <p>This is a placeholder for the {title} documentation. Corevexis Semiconductor ensures all intellectual property and data are handled with the highest security standards.</p>
-  </GenericPage>
-);
 
 const AppRoutes = () => {
   return (
@@ -51,11 +51,15 @@ const AppRoutes = () => {
         <Route path="/process" element={<Process />} />
         <Route path="/technology" element={<TechStack />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/industries" element={<Industries />} />
+        <Route path="/pricing" element={<Pricing />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy" element={<Legal title="Privacy Policy" />} />
-        <Route path="/terms" element={<Legal title="Terms of Service" />} />
+        <Route path="/roadmap" element={<Roadmap />} />
+        <Route path="/roadmap/r/:id" element={<Roadmap />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </PageTransition>
   );

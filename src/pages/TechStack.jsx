@@ -5,12 +5,13 @@ import './TechStack.css';
 
 const TechStack = () => {
   const tools = [
-    { name: 'Verilator', type: 'Simulation', desc: 'High-performance open-source Verilog simulator.' },
-    { name: 'Icarus Verilog', type: 'Simulation', desc: 'Standard compliant Verilog simulation and synthesis.' },
-    { name: 'Yosys', type: 'Synthesis', desc: 'Open-source framework for RTL synthesis.' },
-    { name: 'Vivado WebPACK', type: 'FPGA', desc: 'Xilinx synthesis and implementation.' },
-    { name: 'GTKWave', type: 'Debug', desc: 'Waveform viewer for VCD files.' },
-    { name: 'SymbiYosys', type: 'Formal', desc: 'Front-end for Yosys-based formal verification.' }
+    { name: 'RTL Design', type: 'Design', desc: 'Verilog, SystemVerilog, VHDL' },
+    { name: 'Verification', type: 'Methodology', desc: 'UVM, SVA, JasperGold (formal), Constrained-Random, CDC, DPI' },
+    { name: 'EDA Tools', type: 'Industry standard', desc: 'Cadence Xcelium, JasperGold, Synopsys Design Compiler, QuestaSim, ModelSim, Vivado, Verdi' },
+    { name: 'Protocols', type: 'Integration', desc: 'AMBA-APB, AXI4, AXI4-Lite, UART, SPI, I2C' },
+    { name: 'Embedded', type: 'Firmware', desc: 'Embedded C, FreeRTOS, STM32/ARM Cortex-M' },
+    { name: 'Open-source Flow', type: 'Lab / Prototyping', desc: 'Icarus Verilog, GTKWave, Verilator, SymbiYosys/Yosys, Vivado WebPACK' },
+    { name: 'Software', type: 'Infrastructure', desc: 'Python, Git, Linux, Shell Scripting' }
   ];
 
   return (

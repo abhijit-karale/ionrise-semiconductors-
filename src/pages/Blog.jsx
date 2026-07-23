@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
-import { db } from '../firebase';
+import { fetchBlogPosts } from '../services/api';
 import PageHeader from '../components/PageHeader';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import './Blog.css';
@@ -19,20 +18,13 @@ const Blog = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      if (!db) {
-        // Use mock data
-        setPosts(mockPosts);
-        setLoading(false);
-        return;
-      }
       try {
-        const q = query(collection(db, "posts"), orderBy("date", "desc"));
-        const querySnapshot = await getDocs(q);
-        const fetchedPosts = [];
-        querySnapshot.forEach((doc) => {
-          fetchedPosts.push({ id: doc.id, ...doc.data() });
-        });
-        setPosts(fetchedPosts.length > 0 ? fetchedPosts : mockPosts);
+        const fetchedPosts = await fetchBlogPosts();
+        if (fetchedPosts && fetchedPosts.length > 0) {
+          setPosts(fetchedPosts);
+        } else {
+          setPosts(mockPosts);
+        }
       } catch (error) {
         console.error("Error fetching posts:", error);
         setPosts(mockPosts);
@@ -47,7 +39,7 @@ const Blog = () => {
     <div className="blog-page">
       <PageHeader 
         title="Technical Insights" 
-        subtitle="Thoughts, tutorials, and research from the Corevexis engineering team." 
+        subtitle="Thoughts, tutorials, and research from the Ionrise engineering team." 
       />
       
       <section className="section">
