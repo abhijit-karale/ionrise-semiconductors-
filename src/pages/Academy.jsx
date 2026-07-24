@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
+import SidebarMenu from '../components/SidebarMenu';
 import { PlayCircle, Lock, Unlock, CheckCircle, ShieldCheck, Zap } from 'lucide-react';
 
 const DayCardContent = ({ item, isAccessible, unlocked, setShowCheckout }) => {
@@ -57,6 +58,7 @@ const DayCardContent = ({ item, isAccessible, unlocked, setShowCheckout }) => {
 };
 
 const Academy = () => {
+  const [activeCourse, setActiveCourse] = useState('verilog');
   const [showCheckout, setShowCheckout] = useState(false);
   const [unlocked, setUnlocked] = useState(false); // Mock state for payment success
   const [processing, setProcessing] = useState(false);
@@ -114,20 +116,27 @@ const Academy = () => {
   };
 
   return (
-    <div className="page-container">
+    <div className="page-container" style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
       <PageHeader 
         title="RTL Mastery Academy" 
         subtitle="Go from absolute beginner to UVM Professional in a 45-day gamified journey. Play the first 5 days free." 
       />
 
-      <section className="section" style={{ paddingTop: '2rem', paddingBottom: '6rem' }}>
-        <div className="container" style={{ position: 'relative' }}>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '3rem', alignItems: 'start' }}>
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+        {/* Left Sidebar Menu */}
+        <SidebarMenu activeCourse={activeCourse} onSelectCourse={setActiveCourse} />
+
+        {/* Main Content Area */}
+        <section className="section" style={{ flex: 1, paddingTop: '2rem', paddingBottom: '6rem', overflowY: 'auto' }}>
+          <div className="container" style={{ position: 'relative' }}>
             
-            {/* Left: 45-Day Timeline */}
-            <div>
-              <h2 className="tech-text mb-4" style={{ fontSize: '1.2rem' }}>// CURRICULUM_PATH_45_DAYS</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '3rem', alignItems: 'start' }}>
+              
+              {/* Center: 45-Day Timeline */}
+              <div>
+                <h2 className="tech-text mb-4" style={{ fontSize: '1.2rem', textTransform: 'uppercase' }}>
+                  // {activeCourse.replace('-', '_')}_PATH_45_DAYS
+                </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative' }}>
                 {/* Vertical connecting line */}
                 <div style={{ position: 'absolute', left: '24px', top: '24px', bottom: '24px', width: '2px', background: 'var(--surface-border)', zIndex: 0 }} />
@@ -270,6 +279,7 @@ const Academy = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
     </div>
   );
 };
