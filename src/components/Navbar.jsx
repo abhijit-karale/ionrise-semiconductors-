@@ -146,21 +146,13 @@ const Navbar = () => {
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           <div className="navbar-end" style={{ display: 'flex', gap: '1rem' }}>
-            <Link to="/login" className="btn btn-outline" style={{ display: 'none' }}>
+            <Link to="/login" className="btn btn-outline" style={{ padding: '0.6rem 1.2rem' }}>
               Log In
             </Link>
             <Link to="/contact" className="btn btn-primary" style={{ padding: '0.6rem 1.2rem' }}>
               Contact Us <ChevronRight size={16} />
             </Link>
           </div>
-
-          <style dangerouslySetInnerHTML={{__html: `
-            @media (min-width: 768px) {
-              .navbar-end a.btn-outline {
-                display: inline-flex !important;
-              }
-            }
-          `}} />
         </div>
 
         {/* Mobile Toggle */}
@@ -205,8 +197,10 @@ const Navbar = () => {
             >
               {theme === 'dark' ? <><Sun size={20} style={{marginRight: '0.5rem'}}/> Light Mode</> : <><Moon size={20} style={{marginRight: '0.5rem'}}/> Dark Mode</>}
             </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+            <Link to="/login" className="btn btn-outline mobile-cta" style={{ textAlign: 'center' }}>Log In</Link>
+            <Link to="/contact" className="btn btn-primary mobile-cta">Initiate Handshake</Link>
           </div>
-          <Link to="/contact" className="btn btn-primary mobile-cta">Initiate Handshake</Link>
         </div>
       )}
     </nav>
