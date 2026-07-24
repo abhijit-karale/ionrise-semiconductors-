@@ -41,9 +41,15 @@ const Navbar = () => {
         { name: 'Products', path: '/products' },
         { name: 'IP Cores', path: '/ip-cores' },
         { name: 'Design Flow', path: '/design-flow' },
-        { name: 'Academy (New)', path: '/academy' },
         { name: 'Datasheets', path: '/datasheets' },
         { name: 'Partners', path: '/partners' }
+      ]
+    },
+    {
+      name: 'Students',
+      links: [
+        { name: 'Learning Hub', path: '/learning-hub' },
+        { name: 'Gamified Academy', path: '/academy' }
       ]
     },
     {
