@@ -197,7 +197,8 @@ const Navbar = () => {
             >
               {theme === 'dark' ? <><Sun size={20} style={{marginRight: '0.5rem'}}/> Light Mode</> : <><Moon size={20} style={{marginRight: '0.5rem'}}/> Dark Mode</>}
             </button>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
             <Link to="/login" className="btn btn-outline mobile-cta" style={{ textAlign: 'center' }}>Log In</Link>
             <Link to="/contact" className="btn btn-primary mobile-cta">Initiate Handshake</Link>
           </div>
