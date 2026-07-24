@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Cpu, Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Cpu, Menu, X, ChevronDown, ChevronRight, Sun, Moon } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -145,7 +145,22 @@ const Navbar = () => {
           >
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-          <Link to="/contact" className="btn btn-primary">Initiate Handshake</Link>
+          <div className="navbar-end" style={{ display: 'flex', gap: '1rem' }}>
+            <Link to="/login" className="btn btn-outline" style={{ display: 'none' }}>
+              Log In
+            </Link>
+            <Link to="/contact" className="btn btn-primary" style={{ padding: '0.6rem 1.2rem' }}>
+              Contact Us <ChevronRight size={16} />
+            </Link>
+          </div>
+
+          <style dangerouslySetInnerHTML={{__html: `
+            @media (min-width: 768px) {
+              .navbar-end a.btn-outline {
+                display: inline-flex !important;
+              }
+            }
+          `}} />
         </div>
 
         {/* Mobile Toggle */}
