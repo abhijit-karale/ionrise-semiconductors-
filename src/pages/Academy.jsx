@@ -1,7 +1,60 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import { PlayCircle, Lock, Unlock, CheckCircle, ShieldCheck, Zap } from 'lucide-react';
+
+const DayCardContent = ({ item, isAccessible, unlocked, setShowCheckout }) => {
+  return (
+    <>
+      <div style={{ 
+        width: '50px', height: '50px', borderRadius: '50%', flexShrink: 0,
+        background: isAccessible ? 'var(--surface-color)' : 'transparent', 
+        border: isAccessible ? '2px solid var(--accent-teal)' : '2px solid var(--surface-border)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        color: isAccessible ? 'var(--accent-teal)' : 'var(--text-muted)',
+        boxShadow: isAccessible ? 'var(--glow-teal)' : 'none',
+        backdropFilter: 'blur(10px)',
+        transition: 'all 0.3s ease'
+      }}
+      className={isAccessible ? "hover-scale" : ""}
+      >
+        {isAccessible ? <PlayCircle size={24} /> : <Lock size={20} />}
+      </div>
+
+      <div className="glass-card" style={{ flex: 1, padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <div className="tech-text" style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', marginBottom: '0.25rem' }}>
+            Day {item.day} • {item.level} • {item.category}
+          </div>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: isAccessible ? 'var(--text-main)' : 'var(--text-muted)' }}>
+            {item.title}
+          </h3>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <span style={{ color: 'var(--accent-blue)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 'bold' }}>
+            +{item.xp} XP
+          </span>
+          {item.isFree && !unlocked && (
+            <div className="status-pill verified">FREE</div>
+          )}
+          {!item.isFree && !unlocked && (
+            <button 
+              className="btn btn-outline" 
+              style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
+              onClick={(e) => { e.preventDefault(); setShowCheckout(true); }}
+            >
+              Unlock
+            </button>
+          )}
+          {unlocked && (
+            <div className="status-pill verified" style={{ background: 'transparent', border: 'none' }}><CheckCircle size={20} /></div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
 const Academy = () => {
   const [showCheckout, setShowCheckout] = useState(false);
@@ -89,53 +142,17 @@ const Academy = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ delay: (index % 5) * 0.1 }}
-                      style={{ 
-                        display: 'flex', gap: '1.5rem', alignItems: 'center', position: 'relative', zIndex: 1,
-                        opacity: isAccessible ? 1 : 0.6
-                      }}
+                      style={{ position: 'relative', zIndex: 1, opacity: isAccessible ? 1 : 0.6 }}
                     >
-                      <div style={{ 
-                        width: '50px', height: '50px', borderRadius: '50%', flexShrink: 0,
-                        background: isAccessible ? 'var(--surface-color)' : 'transparent', 
-                        border: isAccessible ? '2px solid var(--accent-teal)' : '2px solid var(--surface-border)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: isAccessible ? 'var(--accent-teal)' : 'var(--text-muted)',
-                        boxShadow: isAccessible ? 'var(--glow-teal)' : 'none',
-                        backdropFilter: 'blur(10px)'
-                      }}>
-                        {isAccessible ? <PlayCircle size={24} /> : <Lock size={20} />}
-                      </div>
-
-                      <div className="glass-card" style={{ flex: 1, padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div>
-                          <div className="tech-text" style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', marginBottom: '0.25rem' }}>
-                            Day {item.day} • {item.level} • {item.category}
-                          </div>
-                          <h3 style={{ margin: 0, fontSize: '1.1rem', color: isAccessible ? 'var(--text-main)' : 'var(--text-muted)' }}>
-                            {item.title}
-                          </h3>
+                      {isAccessible ? (
+                        <Link to={`/academy/play/${item.day}`} style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', textDecoration: 'none' }}>
+                          <DayCardContent item={item} isAccessible={isAccessible} unlocked={unlocked} setShowCheckout={setShowCheckout} />
+                        </Link>
+                      ) : (
+                        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                          <DayCardContent item={item} isAccessible={isAccessible} unlocked={unlocked} setShowCheckout={setShowCheckout} />
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                          <span style={{ color: 'var(--accent-blue)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 'bold' }}>
-                            +{item.xp} XP
-                          </span>
-                          {item.isFree && !unlocked && (
-                            <div className="status-pill verified">FREE</div>
-                          )}
-                          {!item.isFree && !unlocked && (
-                            <button 
-                              className="btn btn-outline" 
-                              style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
-                              onClick={() => setShowCheckout(true)}
-                            >
-                              Unlock
-                            </button>
-                          )}
-                          {unlocked && (
-                            <div className="status-pill verified" style={{ background: 'transparent', border: 'none' }}><CheckCircle size={20} /></div>
-                          )}
-                        </div>
-                      </div>
+                      )}
                     </motion.div>
                   );
                 })}
