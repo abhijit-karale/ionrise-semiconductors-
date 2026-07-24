@@ -1,25 +1,21 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-// Mock configuration. Replace with actual Firebase config from console.
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-app.firebaseapp.com",
-  projectId: "your-app-id",
-  storageBucket: "your-app.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
+  apiKey: "AIzaSyBBPzpRkFXAcLwUV52-DXUDZxy813d-IR8",
+  authDomain: "ionrise-semiconductors.firebaseapp.com",
+  projectId: "ionrise-semiconductors",
+  storageBucket: "ionrise-semiconductors.firebasestorage.app",
+  messagingSenderId: "788046134966",
+  appId: "1:788046134966:web:9ef8286ff3cfb6961f3017",
+  measurementId: "G-2CPYB9QX2F"
 };
 
-// Initialize Firebase only if we have a real config, otherwise return nulls to prevent app crash
-let app;
-let db;
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
-try {
-  app = initializeApp(firebaseConfig);
-  db = getFirestore(app);
-} catch (error) {
-  console.warn("Firebase config is incomplete or missing. Using mock backend for now.");
-}
-
-export { db };
+export { auth, googleProvider };

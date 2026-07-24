@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Smartphone, ArrowRight, Loader2, CheckCircle2 } from 'lucide-react';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../firebase';
 
 // Inline SVGs for brand logos to ensure high quality without external dependencies
 const GoogleIcon = () => (
@@ -37,14 +39,29 @@ const Login = () => {
     e?.preventDefault();
     setStep('loading');
     
-    // Simulate network request
+    // Simulate network request for other mock methods
     setTimeout(() => {
       setStep('success');
-      // Redirect after showing success state
-      setTimeout(() => {
-        navigate('/learning-hub');
-      }, 1000);
+      setTimeout(() => navigate('/learning-hub'), 1000);
     }, 1500);
+  };
+
+  const handleGoogleAuth = async (e) => {
+    e?.preventDefault();
+    setStep('loading');
+    
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      console.log("Successfully logged in:", user.email);
+      setStep('success');
+      setTimeout(() => navigate('/learning-hub'), 1000);
+    } catch (error) {
+      console.error("Error signing in with Google", error);
+      // Revert step on error
+      setStep('initial');
+      alert(`Error logging in: ${error.message}`);
+    }
   };
 
   return (
@@ -116,7 +133,7 @@ const Login = () => {
               {/* Social Logins */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
                 <button 
-                  onClick={handleAuth}
+                  onClick={handleGoogleAuth}
                   className="btn hover-scale" 
                   style={{ 
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', 
